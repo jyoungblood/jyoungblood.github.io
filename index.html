@@ -17,11 +17,25 @@
         display: block;
         margin-bottom: 1rem;
         color: #DE0051;
+        text-decoration: none;
+      }
+      .project-links a:hover{
+        background-color: #DE0051;
+        color: white;
+      }
+      body {
+        /* font-family: Andale Mono, AndaleMono, Menlo-Regular, monospace; */
+      }
+      .arial-narrow{
+        font-family: "Arial Narrow", Arial, sans-serif;
+      }
+      .mono{
+        font-family: Andale Mono, AndaleMono, Menlo-Regular, monospace;
       }
     </style>
 
   </head>
-  <body class="ma4 sans-serif f6">
+  <body class="ma4 mono f6">
 
     <div class="cf ">
 
@@ -32,41 +46,49 @@
 
       <div class="fl project-links">
 
-        <h3>SLIME / VPHP</h3>
-        <a href="https://github.com/hxgf/slime">slime</a>
-        <a href="https://github.com/hxgf/slime-demo">slime-demo</a>
-        <a href="https://github.com/hxgf/slime-utilities">slime-utilities</a>
-        <a href="https://github.com/hxgf/slime-render">slime-render</a>
-        <a href="https://github.com/hxgf/dbkit">dbkit</a>
-        <a href="https://github.com/hxgf/cookie">cookie</a>
-        <a href="https://github.com/hxgf/http-request">http-request</a>
-        <a href="https://github.com/hxgf/x-utilities">x-utilities</a>
-        <a href="https://github.com/hxgf/tigershark">tigershark</a>
-        <br />
+        <div class="flex flex-wrap">
 
-        <h3>MISC WEB</h3>
-        <a href="https://github.com/hxgf/scratch">scratch</a>
-        <a href="https://github.com/hxgf/smoke.js">smoke.js</a>
-        <a href="https://github.com/hxgf/smoke-themes">smoke-themes</a>
-        <a href="https://github.com/hxgf/slabjs">slabjs</a>
-        <a href="https://github.com/hxgf/darkwave">darkwave</a>
-        <a href="https://github.com/hxgf/darkwave-next">darkwave-next</a>
-        <br />
-
-        <h3>INTERNAL</h3>
-        <a href="https://github.com/hxgf/stereo">stereo</a>
-        <a href="https://github.com/hxgf/xprss">xprss</a>
-        <a href="https://github.com/hxgf/0x00">0x00</a>
-        <a href="https://github.com/hxgf/0x00-svelte-auth">0x00-svelte-auth</a>
-        <br />
-
-        <h3>OLD</h3>
-        <a href="https://github.com/hxgf/lexxi">lexxi</a>
-        <a href="https://github.com/hxgf/lexxi-utilities">lexxi-utilities</a>
-        <a href="https://github.com/hxgf/lexxi-handlebars">lexxi-handlebars</a>
-        <a href="https://github.com/hxgf/fashion-camp">fashion-camp</a>
-        <a href="https://github.com/hxgf/base16-chalk-dark">base16-chalk-dark</a>
-
+          <div class="w-50-ns w-100">
+            <h3 class="arial-narrow">VPHP</h3>
+            <a target="_blank" href="https://github.com/hxgf/dbkit">dbkit</a>
+            <a target="_blank" href="https://github.com/hxgf/cookie">cookie</a>
+            <a target="_blank" href="https://github.com/hxgf/http-request">http-request</a>
+            <a target="_blank" href="https://github.com/hxgf/x-utilities">x-utilities</a>
+            <a target="_blank" href="https://github.com/hxgf/tigershark">tigershark</a>
+            <br />
+          </div>
+          <div class="w-50-ns w-100">
+            <h3 class="arial-narrow">MISC WEB</h3>
+            <a target="_blank" href="https://github.com/hxgf/slime">slime</a>
+            <a target="_blank" href="https://github.com/hxgf/slime-demo">slime-demo</a>
+            <a target="_blank" href="https://github.com/hxgf/slime-utilities">slime-utilities</a>
+            <a target="_blank" href="https://github.com/hxgf/slime-render">slime-render</a>
+            <a target="_blank" href="https://github.com/hxgf/scratch">scratch</a>
+            <a target="_blank" href="https://github.com/hxgf/smoke.js">smoke.js</a>
+            <a target="_blank" href="https://github.com/hxgf/smoke-themes">smoke-themes</a>
+            <br />
+          </div>
+          <div class="w-50-ns w-100">
+            <h3 class="arial-narrow">INTERNAL</h3>
+            <a target="_blank" href="https://github.com/hxgf/slabjs">slabjs</a>
+            <a target="_blank" href="https://github.com/hxgf/darkwave">darkwave</a>
+            <a target="_blank" href="https://github.com/hxgf/darkwave-next">darkwave-next</a>
+            <a target="_blank" href="https://github.com/hxgf/stereo">stereo</a>
+            <a target="_blank" href="https://github.com/hxgf/xprss">xprss</a>
+            <a target="_blank" href="https://github.com/hxgf/0x00">0x00</a>
+            <a target="_blank" href="https://github.com/hxgf/0x00-svelte-auth">0x00-svelte-auth</a>
+            <br />
+          </div>
+          <div class="w-50-ns w-100">
+            <h3 class="arial-narrow">OLD / ??</h3>
+            <a target="_blank" href="https://github.com/hxgf/csspentagram">css pentagram</a>
+            <a target="_blank" href="https://github.com/hxgf/lexxi">lexxi</a>
+            <a target="_blank" href="https://github.com/hxgf/lexxi-utilities">lexxi-utilities</a>
+            <a target="_blank" href="https://github.com/hxgf/lexxi-handlebars">lexxi-handlebars</a>
+            <a target="_blank" href="https://github.com/hxgf/fashion-camp">fashion-camp</a>
+            <a target="_blank" href="https://github.com/hxgf/base16-chalk-dark">base16-chalk-dark</a>
+          </div>
+        </div>
       </div>
 
     </div>
