@@ -1,5 +1,5 @@
-# HXGF.GITHUB.IO
+# JYOUNGBLOOD.GITHUB.IO
 
-- Source files for [hxgf.github.io](https://hxgf.github.io)
+- Source files for [jyoungblood.github.io](https://jyoungblood.github.io)
 
-- Created with [hxgf/scratch](https://github.com/hxgf/scratch)
+- Created with [jyoungblood/scratch](https://github.com/jyoungblood/scratch)
