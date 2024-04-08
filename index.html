@@ -15,19 +15,32 @@
     <style>
       .project-links a{
         display: block;
-        margin-bottom: 1rem;
-        color: #DE0051;
+        margin-bottom: 0.25rem;
+        /* color: red; */
         text-decoration: none;
+        padding: 0.5rem;
+
+        background-color: black;
+        color: white;
+
       }
       .project-links a:hover{
-        background-color: #DE0051;
+        background-color: red;
         color: white;
+
       }
+
+      .project-links .description{
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+        padding: 0.125rem;
+      }
+
       body {
         /* font-family: Andale Mono, AndaleMono, Menlo-Regular, monospace; */
       }
       .arial-narrow{
-        font-family: "Arial Narrow", Arial, sans-serif;
+        /* font-family: "Arial Narrow", Arial, sans-serif; */
       }
       .mono{
         font-family: Andale Mono, AndaleMono, Menlo-Regular, monospace;
@@ -37,61 +50,92 @@
   </head>
   <body class="ma4 mono f6">
 
-    <div class="cf ">
+    <div class="mw7 center">
 
-      <div class="fr pa4">
-        <a target="_blank" href="https://hxgf.io"><img class="w5 dib" src="https://jyoungblood.github.io/images/hxgf-bug.svg" /></a>
+      <div class="pa4 tc mb3">
+        <!-- <a target="_blank" href="https://jonathanyoungblood.com"><img class="w5 dib" src="./images/iheartJY.gif" /></a> -->
+        <a target="_blank" href="https://github.com/jyoungblood"><img class="w5 dib mb2" src="./images/iglitchjy.png" /></a>
+        <div class="lh-copy">
+          Open source projects from<br />
+          <a class="black" href="https://jonathanyoungblood.com">Jonathan Youngblood</a> 
+        </div>
       </div>
 
 
-      <div class="fl project-links">
+      <div class="project-links black-80">
 
-        <div class="flex flex-wrap">
 
-          <div class="w-50-ns w-100">
-            <h3 class="arial-narrow">&lt; 3</h3>
-            <a target="_blank" href="https://github.com/jyoungblood/darkwave">darkwave</a>
-            <a target="_blank" href="https://github.com/jyoungblood/slime">slime</a>
-            <a target="_blank" href="https://github.com/jyoungblood/smoke.js">smoke.js</a>
-            <a target="_blank" href="https://github.com/jyoungblood/jquery-digital-sign">jquery-digital-sign</a>
-            <a target="_blank" href="https://github.com/jyoungblood/csspentagram">css pentagram</a>   
-            <br />
+            <div class="tc f5 pa3 bg-black-10 mb4">Recent / Favorites</div>
+
+            <div class="flex flex-wrap mb4">
+                  
+              <div class="w-50 pr3">
+                <a target="_blank" href="https://github.com/jyoungblood/pocketdocs">Pocket Docs</a>
+                <div class="description">Attractive template for writing single-page documentation with semantic HTML</div>
+              </div>
+              <div class="w-50 pl3">
+                <a target="_blank" href="https://github.com/jyoungblood/smoke.js">smoke.js</a>
+                <div class="description">Framework-agnostic styled alert system for javascript</div>
+              </div>
+              <div class="w-50 pr3">
+                <a target="_blank" href="https://github.com/jyoungblood/jquery-digital-sign">jquery-digital-sign</a>
+                <div class="description">Simple digital sign made with jQuery and Tachyons</div>
+              </div>
+              <div class="w-50 pl3">
+                <a target="_blank" href="https://github.com/jyoungblood/slime">SLIME</a>
+                <div class="description">Starter kit for building web apps with SlimPHP</div>
+              </div>
+              <div class="w-50 pr3">
+                <a target="_blank" href="https://github.com/jyoungblood/darkwave">Darkwave</a>
+                <div class="description">Pragmatic web application development kit</div>
+              </div>
+              <div class="w-50 pl3">
+                <a target="_blank" href="https://github.com/jyoungblood/scratch">Scratch</a>
+                <div class="description">Blank slate for starting static web sites with Apache</div>
+              </div>
+
+            </div>
+
+
+            <div class="tc f5 pa3 bg-black-10 mb4">VPHP</div>
+
+            <div class="flex flex-wrap mb5">
+                    
+            <div class="w-50 pr3">
+              <a target="_blank" href="https://github.com/jyoungblood/dbkit">dbkit</a>
+              <div class="description">Vanilla PHP functions to handle database connection and CRUD operations with PDO</div>
+            </div>
+            <div class="w-50 pl3">
+              <a target="_blank" href="https://github.com/jyoungblood/http-request">http-request</a>
+              <div class="description">Vanilla PHP functions to handle sending and receiving HTTP requests with CURL</div>
+            </div>
+            <div class="w-50 pr3">
+              <a target="_blank" href="https://github.com/jyoungblood/x-utilities">x-utilities</a>
+              <div class="description">A collection of standalone utility functions to help do things faster with PHP</div>
+            </div>
+            <div class="w-50 pl3">
+              <a target="_blank" href="https://github.com/jyoungblood/cookie">cookie</a>
+              <div class="description">Vanilla PHP functions to more easily handle cookie operations</div>
+            </div>
+
           </div>
 
-          <div class="w-50-ns w-100">
-            <h3 class="arial-narrow">VPHP</h3>
-            <a target="_blank" href="https://github.com/jyoungblood/dbkit">dbkit</a>
-            <a target="_blank" href="https://github.com/jyoungblood/http-request">http-request</a>
-            <a target="_blank" href="https://github.com/jyoungblood/x-utilities">x-utilities</a>
-            <a target="_blank" href="https://github.com/jyoungblood/cookie">cookie</a>
-            <a target="_blank" href="https://github.com/jyoungblood/tigershark">tigershark</a>
-            <br />
-          </div>
-          <div class="w-50-ns w-100">
-            <h3 class="arial-narrow">MISC WEB</h3>
-            <a target="_blank" href="https://github.com/jyoungblood/slime-render">slime-render</a>
-            <a target="_blank" href="https://github.com/jyoungblood/stereo">stereo</a>
-            <a target="_blank" href="https://github.com/jyoungblood/scratch">scratch</a>
-            <a target="_blank" href="https://github.com/jyoungblood/slabjs">slabjs</a>
 
-            <br />
-          </div>
-          <div class="w-50-ns w-100">
-            <h3 class="arial-narrow">OLD / ??</h3>         
-            <a target="_blank" href="https://github.com/jyoungblood/xprss">xprss</a>
-            <a target="_blank" href="https://github.com/jyoungblood/lexxi">lexxi</a>
-            <a target="_blank" href="https://github.com/jyoungblood/lexxi-utilities">lexxi-utilities</a>
-            <a target="_blank" href="https://github.com/jyoungblood/fashion-camp">fashion-camp</a>
-            <br />
-          </div>
+
+
+
+
+
+
+
+
+
         </div>
       </div>
 
     </div>
 
-    <!-- <div class="tr">
-        <a target="_blank" class="sans-serif black-50 f2 no-underline" href="https://github.com/jyoungblood/jyoungblood.github.io">☳</a>
-    </div> -->
+
 
   </body>
 </html>
