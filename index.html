@@ -1,25 +1,97 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html class="h-100">
+<head>
 
-    <title>Open Source Projects | Jonathan Youngblood</title>
+  <title>Open Source Projects | Jonathan Youngblood</title>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="https://jyoungblood.github.io/favicon.ico">
-    
-    <link rel="stylesheet" href="https://jyoungblood.github.io/css/lib/tachyons.min.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="https://jyoungblood.github.io/favicon.ico">
 
-    <style>
+  <link rel="stylesheet" href="https://jyoungblood.github.io/css/lib/tachyons.min.css" />
+
+</head>
+<body class="pa4-ns pa3 bg-black-20">
+
+  
+<!-- <link rel="stylesheet" href="./css/lib/fontawesome.all.min.css" /> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  body {
+    /* 		font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif; */
+    font-family: Andale Mono, AndaleMono, Menlo-Regular, monospace;
+    /* 		background: black; */
+    /* 		color: white; */
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.8);
+
+  }
+
+  .ref-links a {
+    display: block;
+    margin-bottom: 0.1rem;
+    /* padding-bottom: 0.5rem; */
+    text-decoration: underline;
+    font-size: 0.9rem;
+  }
+
+  .ref-links a,
+  .ref-links a:visited {
+    color: black;
+  }
+
+  .ref-links a:hover {
+    text-decoration: none;
+    /* background: white; */
+    /* 		color: rgba(0,0,0,0.9); */
+  }
+
+  .bg-cyan {
+    background: aquamarine;
+  }
+
+  ::selection {
+    background: rgba(0, 0, 00.8);
+    color: white;
+  }
+
+  ::-moz-selection {
+    background: #ffb7b7;
+    /* Gecko Browsers */
+  }
+
+
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+
       .project-links a{
         display: block;
         margin-bottom: 0.25rem;
-        text-decoration: none;
+        /* text-decoration: none; */
         padding: 0.5rem;
-        background-color: black;
-        color: white;
+        /* background-color: black; */
+        color: black;
       }
       .project-links a:hover{
         background-color: red;
@@ -31,39 +103,61 @@
         padding: 0.125rem;
       }
 
-      .mono{
-        font-family: Andale Mono, AndaleMono, Menlo-Regular, monospace;
+
+
+
+      .ref-links .description{
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+        padding: 0.125rem;
       }
-    </style>
-
-  </head>
-  <body class="ma4 mono f6">
-
-    <div class="mw7 center">
 
 
-      <div class="pa4 tc mb3">
+      .hover-no-underline:hover {
+        text-decoration: none;
+      }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="mw7 center pt5">
+
+      <div class="f3 mv4 tc">
+        <a class="black hover-no-underline" target="_blank" href="https://github.com/jyoungblood">(∩｀-´)⊃━━ ☆ﾟ . * ･ ｡ ﾟ</a>
+      </div>
+
+      <div class="pa4 tc mb5">
         <!-- <a target="_blank" href="https://jonathanyoungblood.com"><img class="w5 dib" src="./images/iheartJY.gif" /></a> -->
-        <a class="hover-bg-red" target="_blank" href="https://github.com/jyoungblood"><img class="w5 dib mb2" src="./images/iglitchjy.png" /></a>
+        <!-- <a class="hover-bg-red" target="_blank" href="https://github.com/jyoungblood"><img class="w5 dib mb2" src="./images/iheartjy-glitch.png" /></a> -->
         <div class="lh-copy">
-          Open source projects from<br />
-          <a class="black hover-red" href="https://jonathanyoungblood.com">Jonathan Youngblood</a> 
+          <div class="mb2">Open source projects from</div>
+          <a class="black hover-no-underline" href="https://jonathanyoungblood.com">Jonathan Youngblood</a> 
         </div>
       </div>
 
 
-      <div class="project-links black-80">
+      <div class="ref-links black-80">
 
-        <div class="tc f5 pa3 bg-black-10 mb4">Recent / Favorites</div>
+        <!-- <div class="tc f5 pa3 bg-black-10 mb4">Recent / Favorites</div> -->
 
         <div class="flex flex-wrap mb3">
               
           <div class="w-50-ns pr3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/pocketdocs">Pocket Docs</a>
+            <a target="_blank" href="https://jyoungblood.github.io/pocketdocs/">Pocket Docs</a>
             <div class="description">Attractive template for writing single-page documentation with semantic HTML</div>
           </div>
           <div class="w-50-ns pl3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/smoke.js">smoke.js</a>
+            <a target="_blank" href="https://smoke.js.org/">smoke.js</a>
             <div class="description">Framework-agnostic styled alert system for javascript</div>
           </div>
           <div class="w-50-ns pr3-ns">
@@ -75,7 +169,7 @@
             <div class="description">Starter kit for building web apps with SlimPHP</div>
           </div>
           <div class="w-50-ns pr3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/darkwave">Darkwave</a>
+            <a target="_blank" href="https://darkwave.ltd">Darkwave</a>
             <div class="description">Pragmatic web application development kit</div>
           </div>
           <div class="w-50-ns pl3-ns">
@@ -83,35 +177,323 @@
             <div class="description">Blank slate for starting static web sites with Apache</div>
           </div>
 
-        </div>
 
-        <div class="tc f5 pa3 bg-black-10 mb4">VPHP</div>
-
-        <div class="flex flex-wrap mb5">
-                
           <div class="w-50-ns pr3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/dbkit">dbkit</a>
-            <div class="description">Vanilla PHP functions to handle database connection and CRUD operations with PDO</div>
-          </div>
-          <div class="w-50-ns pl3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/http-request">http-request</a>
-            <div class="description">Vanilla PHP functions to handle sending and receiving HTTP requests with CURL</div>
-          </div>
-          <div class="w-50-ns pr3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/x-utilities">x-utilities</a>
-            <div class="description">Collection of standalone utility functions to help do things faster with PHP</div>
-          </div>
-          <div class="w-50-ns pl3-ns">
-            <a target="_blank" href="https://github.com/jyoungblood/cookie">cookie</a>
-            <div class="description">Vanilla PHP functions to more easily handle cookie operations</div>
+            <a target="_blank" href="https://vphp.dev">VPHP</a>
+            <div class="description">Collection of dependency-free general purpose Vanilla PHP functions to handle various operations</div>
           </div>
 
         </div>
+
 
       </div>
 
     </div>
 
 
-  </body>
+
+
+
+
+
+
+<div class="dn">
+
+
+
+  <div class="flex flex-wrap items-start ref-links lh-copy">
+
+
+
+
+    <div class="w-25-l w-50-m w-100 pr4-l">
+
+
+
+      <div class="pa2 bg-cyan mb3">OPEN SOURCE</div>
+      
+  <a class="" target="_blank" href="https://jyoungblood.github.io">jyoungblood.github.io</a>
+  <br />
+
+  <a class="" target="_blank" href="https://github.com/jyoungblood/pocketdocs"><i class="fab fa-github"></i> pocketdocs</a>
+  <a class="" target="_blank" href="https://github.com/jyoungblood/slime"><i class="fab fa-github"></i> slime</a>
+  <a class="" target="_blank" href="https://github.com/jyoungblood/jquery-digital-sign"><i class="fab fa-github"></i> jquery-digital-sign</a>
+  <a class="" target="_blank" href="https://github.com/jyoungblood/smoke.js"><i class="fab fa-github"></i> smoke.js</a>
+
+
+  <br />
+
+  <a class="" target="_blank" href="https://vphp.dev">VPHP.DEV</a>
+
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/slime-demo"><i class="fab fa-github"></i> slime demo</a> -->
+
+
+
+  <!-- <a class="" target="_blank" href="https://slime.technology">slime</a> -->
+  <!-- <a class="" target="_blank" href="https://slime.technology">slime</a> -->
+  <a class="" target="_blank" href="https://darkwave.ltd">▲▼ darkwave </a>
+  <!-- <a class="" target="_blank" href="https://stereotk.com">STEREO TK (rip)</a> -->
+
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/scratch"><i class="fab fa-github"></i> scratch</a> -->
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/dbkit"><i class="fab fa-github"></i> dbkit</a> -->
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/http-request"><i class="fab fa-github"></i> http-request</a> -->
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/x-utilities"><i class="fab fa-github"></i> x-utilities</a> -->
+
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/slime-utilities"><i class="fab fa-github"></i> slime-utilities</a> -->
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/cookie"><i class="fab fa-github"></i> cookie</a> -->
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/slime-render"><i class="fab fa-github"></i> slime-render</a> -->
+
+
+
+      <!-- <div class="pa2 bg-black-10 mt3 mb3">&nbsp;</div> -->
+  <!-- <a class="" target="_blank" href="https://github.com/jyoungblood/slime-utilities"><i class="fab fa-github"></i> slime-utilities</a> -->
+
+  <!-- fixit -->
+
+      <!-- <a target="_blank" href="https://jyoungblood.io/oss">hxgf.io/oss</a> -->
+      
+      <!-- // fixit single line w/ multiple links -->
+      <!--
+      <a target="_blank" href="https://gitlab.com/jyoungblood/darkwave"><i class="fab fa-gitlab" ></i> DW (repo)</a>
+      <a target="_blank" href="https://darkwave.ltd/docs"><i class="fa fa-book" ></i> DW (docs)</a>
+      
+      <a target="_blank" href="https://gitlab.com/jyoungblood/stereo"><i class="fab fa-gitlab" ></i> STEREO (repo)</a>
+      <a target="_blank" href="https://stereotk.com/docs"><i class="fa fa-book" ></i> STEREO (docs)</a>
+      
+      <a target="_blank" href="https://gitlab.com/jyoungblood/slabjs"><i class="fab fa-gitlab" ></i> SLAB JS</a>
+      <a target="_blank" href="https://gitlab.com/jyoungblood/scratch"><i class="fa fa-book" ></i> SCRATCH</a>
+      -->
+  <!-- fixit -->
+  <!-- subsection - past projects
+  stereo
+  tigershark -->
+
+
+      <br /> &nbsp;
+
+
+    </div>
+
+
+
+
+    <div class="w-25-l w-50-m w-100 pr4-ns cf">
+
+
+  <!-- fixit -->
+
+      <div class="pa2 bg-pink mb3">RECENT DEV 
+        <!-- WORK -->
+      </div>
+
+      <a class="" target="_blank" href="http://port164.com/">Port 164 / Ocean Companies</a>
+      <a class="" target="_blank" href="http://nrha.com/">NRHA</a>
+
+
+
+      <div class="pa2 bg-black-10 mt4 mb3">WEB SITES</div>
+
+  <!-- (or news? recent projects?) -->
+      <img class="w3 dib fr ma2" src="./images/hxgf-bug.png" />
+
+      <a class="" target="_blank" href="https://cassett.es/">cassett.es</a>
+      <a class="" target="_blank" href="https://hxgf.io/">hxgf.io</a>
+
+  <!-- // gfx where available -->
+      <a class="" target="_blank" href="https://dvst.cc/">dvst.cc</a>
+
+      <a class="" target="_blank" href="https://fieldrecordings.hxgf.io/">field recordings</a>
+
+
+
+
+
+
+
+  <!-- fixit -->
+
+      <!-- <div class="pa2 bg-black-10 mt4 mb3">MISC URLS</div>
+  <a class="" target="_blank" href="https://commons.wikimedia.org/wiki/File:Man_in_plaid_shirt.jpg">Wikimedia - File:Man_in_plaid_shirt.jpg</a> -->
+  <!-- <a class=""
+        target="_blank" href="https://astro-charts.com/tools/birth_chart/?name=Jonathan+Youngblood&pk=&lat=35.46756&lng=-97.51643&place=Oklahoma+City%2C+Oklahoma%2C+United+States&date=1981-8-20+10-36&timeRadio=am">birth
+        chart</a>
+      <a class="" target="_blank" href="/images/astro-jy-big-cool.png">astro placidus</a>
+
+
+      <br />
+
+      <a target="_blank" href="https://www.youtube.com/user/jonathanyoungblood/playlists?view_as=subscriber">YT playlists</a>
+      <a target="_blank" href="https://www.youtube.com/watch?v=UyX2je8ByYY&list=RDMM&index=24">YT my mix</a>
+      <a target="_blank" href="https://www.youtube.com/feed/history">YT history</a>
+
+
+
+      <br /> -->
+  <!--
+  <a target="_blank" href="https://beerplusplus.tumblr.com/archive/filter-by/audio">beer++ (audio)</a>
+  <a target="_blank" href="https://beerplusplus.tumblr.com/archive/filter-by/video">beer++ (video)</a>
+  <a target="_blank" href="https://daily.bandcamp.com/">bandcamp daily</a>
+  -->
+
+  <!--
+    here or contact?
+  Hxgf arena
+  Youtube
+  Studio insta
+  Cassettes Twitter
+  Hxgf twitter
+  github
+  drib?
+  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <br /> &nbsp;
+
+
+
+
+
+
+    </div>
+
+
+    <div class="w-25-l w-50-m w-100 pr4-ns">
+
+
+
+      <div class="pa2 bg-yellow mb3">VISUAL ART</div>
+
+      <a class="" target="_blank" href="https://jyoungblood.photos/">jyoungblood.photos</a>
+
+      <a class="" target="_blank" href="https://jy.hxgf.io/">jy art</a>
+
+
+
+      <div class="pa2 bg-black-10 mt4 mb3">MUSIC</div>
+      <!-- uiuxui? -->
+      
+      <!-- ffffonts? -->
+
+
+      <a class="" target="_blank" href="https://soundcloud.com/nescientia">ne scientia</a>
+
+      <a class="" target="_blank" href="https://analog-music.bandcamp.com/album/radio-friendly">radio friendly</a>
+
+      <a class="" target="_blank" href="https://cedres.bandcamp.com/">cedres</a>
+
+      <a class="" target="_blank" href="http://analog.hxgf.io/">analog music</a>
+
+
+      <!-- uiuxui? -->
+      
+      <!-- ffffonts? -->
+
+
+
+
+      <!-- fixit -->
+      <!-- are there other places i have art online? -->
+        <!-- link to individual projects? -->
+
+      <!-- <div class="pa2 bg-black-10 mt3 mb3">ART</div> -->
+
+
+
+
+      <!-- <a class="" target="_blank" href="https://xeros.hxgf.io/">xerOS</a> -->
+
+      <!-- <a class="" target="_blank" href="https://darkwave.ltd/">DW</a>
+      <a class="" target="_blank" href="https://stereotk.com/">STEREO TK</a>
+      
+      <br />
+      
+      <a class="" target="_blank" href="https://xeros.hxgf.io/">xerOS</a> -->
+
+
+
+
+
+      <br /> &nbsp;
+
+
+
+
+    </div>
+
+
+
+
+    <div class="w-25-l w-50-m w-100">
+
+
+      <div class="pa2 bg-orange mb3">CONTACT / SOCIAL</div>
+
+      <a href="mailto:jonathan.youngblood@gmail.com"><i class="fa fa-envelope"></i> jonathan.youngblood@gmail.com</a>
+
+      <a target="_blank" href="https://github.com/jyoungblood"><i class="fab fa-github"></i> @jyoungblood</a>
+
+      <a target="_blank" href="https://twitter.com/jyoungblood"><i class="fab fa-twitter"></i> @jyoungblood</a>
+
+      <a target="_blank" rel="me" href="https://indieweb.social/@jy"><i class="fab fa-mastodon"></i> @jy@indieweb.social</a>
+
+      <a target="_blank" href="https://www.are.na/j-youngblood"><span style="font-family: courier;">**</span> j-youngblood</a>
+
+      <a target="_blank" href="https://instagram.com/jonathanyoungblood"><i class="fab fa-instagram"></i> @jonathanyoungblood</a>
+
+      <!-- <a target="_blank" href="https://dribbble.com/jyoungblood"><i class="fab fa-dribbble"></i> @jyoungblood</a> -->
+
+
+  <!-- linkedin? -->
+  <!-- other links -->
+
+      <div class="pa2 bg-black-10 mt4 mb3">??</div>
+      <a class="" target="_blank" href="https://commons.wikimedia.org/wiki/File:Man_in_plaid_shirt.jpg">Wikimedia - File:Man_in_plaid_shirt.jpg</a>
+      <a class="" target="_blank" href="/images/astro-jy-big-inverted.png">birth chart / placidus</a>
+  <!-- <a class=""
+        target="_blank" href="https://astro-charts.com/tools/birth_chart/?name=Jonathan+Youngblood&pk=&lat=35.46756&lng=-97.51643&place=Oklahoma+City%2C+Oklahoma%2C+United+States&date=1981-8-20+10-36&timeRadio=am">birth
+        chart</a>
+      <a class="" target="_blank" href="/images/astro-jy-big-cool.png">astro placidus</a>
+  -->
+
+
+    </div>
+
+
+
+
+
+
+  </div>
+
+
+</div>
+
+
+
+
+</body>
 </html>
