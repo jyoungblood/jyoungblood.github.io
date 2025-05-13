@@ -38,16 +38,15 @@ const { title } = Astro.props;
       monospace;
     /* 		background: black; */
     /* 		color: white; */
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: rgba(0, 0, 0, 0.8);
   }
 
   .ref-links a {
-    display: block;
     margin-bottom: 0.25rem;
     /* padding-bottom: 0.5rem; */
-    text-decoration: underline;
-    font-size: 0.8rem;
+    text-decoration: none;
+    font-size: 1rem;
     font-weight: 700;
   }
 
@@ -57,9 +56,15 @@ const { title } = Astro.props;
   }
 
   .ref-links a:hover {
-    text-decoration: none;
+    text-decoration: underline;
     /* background: white; */
     /* 		color: rgba(0,0,0,0.9); */
+  }
+
+  .ref-links .description {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6 !important;
   }
 
   .bg-cyan {
