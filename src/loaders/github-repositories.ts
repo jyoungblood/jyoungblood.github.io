@@ -1,10 +1,9 @@
 import type { Loader } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-import type { RepositoryCuration } from '../data/repository-curation';
-
 interface GitHubRepository {
   archived: boolean;
+  created_at: string;
   default_branch: string;
   description: string | null;
   disabled: boolean;
@@ -26,13 +25,13 @@ interface GitHubRepository {
   stargazers_count: number;
   topics: string[];
   updated_at: string;
+  visibility: 'public' | 'private' | 'internal';
 }
 
 interface GitHubRepositoriesLoaderOptions {
   username?: string;
   organizations?: string[];
   token?: string;
-  curation?: Record<string, RepositoryCuration>;
 }
 
 const repositorySchema = z.object({
@@ -50,6 +49,7 @@ const repositorySchema = z.object({
   stars: z.number().int().nonnegative(),
   forks: z.number().int().nonnegative(),
   openIssues: z.number().int().nonnegative(),
+  createdAt: z.string(),
   updatedAt: z.string(),
   pushedAt: z.string().nullable(),
   defaultBranch: z.string(),
@@ -57,8 +57,7 @@ const repositorySchema = z.object({
   disabled: z.boolean(),
   fork: z.boolean(),
   template: z.boolean(),
-  featured: z.boolean(),
-  order: z.number(),
+  visibility: z.enum(['public', 'private', 'internal']),
 });
 
 function nextPage(linkHeader: string | null): string | null {
@@ -110,7 +109,6 @@ export function githubRepositoriesLoader({
   username,
   organizations = [],
   token,
-  curation = {},
 }: GitHubRepositoriesLoaderOptions) {
   return {
     name: 'github-repositories',
@@ -140,17 +138,14 @@ export function githubRepositoriesLoader({
       const repositories = [
         ...new Map(batches.flat().map((repository) => [repository.full_name, repository])).values(),
       ];
+      const visibleRepositories = repositories.filter(
+        (repository) => repository.visibility === 'public' && !repository.archived,
+      );
 
       // Only clear persisted content after a successful fetch.
       store.clear();
 
-      for (const repository of repositories) {
-        const isPersonalRepository =
-          username?.toLocaleLowerCase() === repository.owner.login.toLocaleLowerCase();
-        const editorial =
-          curation[repository.full_name] ??
-          (isPersonalRepository ? curation[repository.name] : undefined) ??
-          {};
+      for (const repository of visibleRepositories) {
         const id = repository.full_name;
         const data = await parseData({
           id,
@@ -159,19 +154,17 @@ export function githubRepositoriesLoader({
             fullName: repository.full_name,
             owner: repository.owner.login,
             ownerType: repository.owner.type,
-            title: editorial.title ?? repository.name,
-            description: editorial.description ?? repository.description,
+            title: repository.name,
+            description: repository.description,
             url: repository.html_url,
-            homepage:
-              editorial.homepage !== undefined
-                ? editorial.homepage
-                : repository.homepage?.trim() || null,
+            homepage: repository.homepage?.trim() || null,
             language: repository.language,
             license: repository.license?.spdx_id ?? null,
             topics: repository.topics ?? [],
             stars: repository.stargazers_count,
             forks: repository.forks_count,
             openIssues: repository.open_issues_count,
+            createdAt: repository.created_at,
             updatedAt: repository.updated_at,
             pushedAt: repository.pushed_at,
             defaultBranch: repository.default_branch,
@@ -179,8 +172,7 @@ export function githubRepositoriesLoader({
             disabled: repository.disabled,
             fork: repository.fork,
             template: repository.is_template,
-            featured: editorial.featured ?? false,
-            order: editorial.order ?? Number.MAX_SAFE_INTEGER,
+            visibility: repository.visibility,
           },
         });
 
@@ -188,7 +180,9 @@ export function githubRepositoriesLoader({
       }
 
       logger.info(
-        `Loaded ${repositories.length} public repositories from ${sources.length} GitHub sources.`,
+        `Loaded ${visibleRepositories.length} public, non-archived repositories from ` +
+          `${sources.length} GitHub sources; excluded ` +
+          `${repositories.length - visibleRepositories.length}.`,
       );
     },
   } satisfies Loader;

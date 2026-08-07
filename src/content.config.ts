@@ -1,6 +1,5 @@
 import { defineCollection } from 'astro:content';
 
-import { repositoryCuration } from './data/repository-curation';
 import { githubRepositoriesLoader } from './loaders/github-repositories';
 
 const repositories = defineCollection({
@@ -8,7 +7,6 @@ const repositories = defineCollection({
     username: 'jyoungblood',
     organizations: ['vergekit'],
     token: process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN,
-    curation: repositoryCuration,
   }),
 });
 
