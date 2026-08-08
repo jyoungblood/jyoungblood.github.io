@@ -21,6 +21,8 @@ owner. Use the full GitHub name, such as `vergekit/repository-name`, when you
 need to distinguish repositories with matching names.
 
 The loader works without authentication for local development. Set
-`GITHUB_TOKEN` (or `GH_TOKEN`) to use GitHub's higher authenticated API rate
-limit. The GitHub Pages workflow passes its read-only repository token to the
-build automatically.
+`GITHUB_TOKEN` (or `GH_TOKEN`) to populate latest-release and default-branch
+commit-count metadata through GitHub's GraphQL API.
+Without a token, those two table columns remain blank. For local development,
+copy `.env.example` to `.env`, replace the placeholder with a read-only token,
+and restart the development server.

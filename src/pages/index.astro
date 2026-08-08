@@ -1,8 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 
-import RepositoryLayout from "../layouts/RepositoryLayout.astro";
-
 // A short name matches any fetched owner. Use `owner/name` to disambiguate.
 // Featured projects are displayed in the order listed here.
 const featuredRepositoryNames = [
@@ -15,9 +13,7 @@ const featuredRepositoryNames = [
   // "stereo",
 ];
 
-const hiddenRepositoryNames: string[] = [
-  ".github",
-];
+const hiddenRepositoryNames: string[] = [".github"];
 
 const repositories = await getCollection("repositories");
 
@@ -48,26 +44,95 @@ const featuredRepositories = repositories
 
 const repositoryIndex = repositories
   .filter(({ data }) => repositoryNameIndex(data, hiddenNames) < 0)
-  .sort((a, b) => Date.parse(b.data.updatedAt) - Date.parse(a.data.updatedAt));
+  .sort((a, b) => Date.parse(b.data.createdAt) - Date.parse(a.data.createdAt));
 
 const formatRepositoryDate = (date: string) =>
   new Intl.DateTimeFormat("en-US", {
     month: "short",
     year: "numeric",
   }).format(new Date(date));
+
+const formatRepositoryYear = (date: string) =>
+  new Intl.DateTimeFormat("en-US", { year: "numeric" }).format(new Date(date));
+
+const formatRelease = (release: string | null) =>
+  release?.replace(/^v/i, "") ?? "";
+
+const formatRepositoryName = (
+  repository: (typeof repositories)[number]["data"],
+) =>
+  repository.ownerType === "Organization"
+    ? repository.fullName
+    : repository.name;
+
+const formatRomanNumeral = (value: number) => {
+  const numerals: Array<[number, string]> = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"],
+  ];
+  let remainder = value;
+  let result = "";
+
+  for (const [number, numeral] of numerals) {
+    while (remainder >= number) {
+      result += numeral;
+      remainder -= number;
+    }
+  }
+
+  return result;
+};
 ---
 
-<RepositoryLayout
-  title="Jonathan Youngblood - Open Source Projects"
-  description="Open source projects by Jonathan Youngblood"
->
-  <center>
-    <h1>
-      Open Source Projects from <a href="https://github.com/jyoungblood"
-        >Jonathan Youngblood</a>
-    </h1>
-    <main id="content">
-      <!-- <section id="selected-projects" aria-labelledby="selected-projects-heading">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Open source projects by Jonathan Youngblood"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Jonathan Youngblood - Open Source Projects</title>
+    <style>
+      a:visited {
+        color: #0000ff;
+      }
+
+      tbody tr:hover {
+        background-color: #f2f2f2;
+      }
+
+      ::selection {
+        color: #ffffff;
+        background-color: #000000;
+      }
+    </style>
+  </head>
+  <body style="font-family: sans-serif;">
+    <center>
+      <h1 style="padding: 60px 0; font-size: 2.5em;">
+        OPEN SOURCE PROJECTS FROM <a
+          href="https://jonathanyoungblood.com"
+          target="_blank"
+          rel="noopener">JONATHAN YOUNGBLOOD</a
+        >
+      </h1>
+      <main id="content">
+        <!-- <section id="selected-projects" aria-labelledby="selected-projects-heading">
       <h2 id="selected-projects-heading">Favorites ❤️</h2>
       <ol>
         {
@@ -110,59 +175,77 @@ const formatRepositoryDate = (date: string) =>
       </ol>
     </section> -->
 
-      <section id="repository-index" aria-labelledby="repository-index-heading">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col" aria-label="Favorite"></th>
-              <th scope="col" align="left"></th>
-              <th scope="col"></th>
-              <th scope="col">Language</th>
-              <th scope="col">Created</th>
-              <th scope="col">Updated</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              repositoryIndex.map(({ data }) => {
-                const isFavorite =
-                  repositoryNameIndex(data, featuredNames) >= 0;
+        <section
+          id="repository-index"
+          aria-labelledby="repository-index-heading"
+        >
+          <table width="100%" cellpadding="8" rules="rows" frame="below">
+            <colgroup>
+              <col span="3" />
+              <col span="6" width="10%" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" aria-label="Favorite"></th>
+                <th scope="col" align="left"></th>
+                <th scope="col"></th>
+                <th scope="col" align="center">Language</th>
+                <th scope="col" align="center">Release</th>
+                <th scope="col" align="center">Commits</th>
+                <th scope="col" align="center">Type</th>
+                <th scope="col" align="center">Created</th>
+                <th scope="col" align="center">Updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                repositoryIndex.map(({ data }) => {
+                  const isFavorite =
+                    repositoryNameIndex(data, featuredNames) >= 0;
 
-                return (
-                  <tr>
-                    <td aria-label={isFavorite ? "Favorite" : undefined}>
-                      {isFavorite ? "★" : ""}
-                    </td>
-                    <th scope="row" align="left">
-                      <a href={data.url} target="_blank" rel="noopener">
-                        {data.title}
-                      </a>
-                    </th>
-                    <td>{data.description ?? ""}</td>
-                    <td>{data.language ?? ""}</td>
-                    <td>
-                      <time datetime={data.createdAt}>
-                        {formatRepositoryDate(data.createdAt)}
-                      </time>
-                    </td>
-                    <td>
-                      <time datetime={data.updatedAt}>
-                        {formatRepositoryDate(data.updatedAt)}
-                      </time>
-                    </td>
-                  </tr>
-                );
-              })
-            }
-          </tbody>
-        </table>
-      </section>
-    </main>
-
-    <footer>
-      &copy; {new Date().getFullYear()} &nbsp;
-      <a href="https://jonathanyoungblood.com">Jonathan Youngblood</a>. All
-      rights reserved.
-    </footer>
-  </center>
-</RepositoryLayout>
+                  return (
+                    <tr>
+                      <td aria-label={isFavorite ? "Favorite" : undefined}>
+                        {isFavorite ? "★" : ""}
+                      </td>
+                      <th scope="row" align="left">
+                        <a href={data.url} target="_blank" rel="noopener">
+                          {formatRepositoryName(data)}
+                        </a>
+                      </th>
+                      <td>{data.description ?? ""}</td>
+                      <td align="center">{data.language ?? ""}</td>
+                      <td align="center">
+                        {formatRelease(data.latestRelease)}
+                      </td>
+                      <td align="center">{data.commitCount ?? ""}</td>
+                      <td align="center">{data.topics[0] ?? ""}</td>
+                      <td align="center">
+                        <time datetime={data.createdAt}>
+                          {formatRepositoryYear(data.createdAt)}
+                        </time>
+                      </td>
+                      <td align="center">
+                        <time datetime={data.updatedAt}>
+                          {formatRepositoryDate(data.updatedAt)}
+                        </time>
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <br /><br /><br />
+      <footer>
+        &copy; {formatRomanNumeral(new Date().getFullYear())} &nbsp;
+        <a href="https://github.com/jyoungblood" target="_blank" rel="noopener"
+          >Jonathan Youngblood</a
+        >. All rights reserved.
+      </footer>
+      <br /><br />
+    </center>
+  </body>
+</html>

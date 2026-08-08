@@ -34,6 +34,24 @@ interface GitHubRepositoriesLoaderOptions {
   token?: string;
 }
 
+interface GitHubRepositoryDetails {
+  defaultBranchRef: {
+    target: {
+      history?: {
+        totalCount: number;
+      };
+    };
+  } | null;
+  latestRelease: {
+    tagName: string;
+  } | null;
+}
+
+interface GitHubGraphQLResponse {
+  data?: Record<string, GitHubRepositoryDetails | null>;
+  errors?: Array<{ message: string }>;
+}
+
 const repositorySchema = z.object({
   name: z.string(),
   fullName: z.string(),
@@ -49,6 +67,8 @@ const repositorySchema = z.object({
   stars: z.number().int().nonnegative(),
   forks: z.number().int().nonnegative(),
   openIssues: z.number().int().nonnegative(),
+  commitCount: z.number().int().nonnegative().nullable(),
+  latestRelease: z.string().nullable(),
   createdAt: z.string(),
   updatedAt: z.string(),
   pushedAt: z.string().nullable(),
@@ -74,15 +94,12 @@ function nextPage(linkHeader: string | null): string | null {
 async function fetchRepositories(
   initialUrl: string,
   userAgent: string,
-  token?: string,
 ): Promise<GitHubRepository[]> {
   const headers = new Headers({
     Accept: 'application/vnd.github+json',
     'User-Agent': `${userAgent}-astro-portfolio`,
     'X-GitHub-Api-Version': '2022-11-28',
   });
-
-  if (token) headers.set('Authorization', `Bearer ${token}`);
 
   const repositories: GitHubRepository[] = [];
   let url: string | null = initialUrl;
@@ -103,6 +120,67 @@ async function fetchRepositories(
   }
 
   return repositories;
+}
+
+async function fetchRepositoryDetails(
+  repositories: GitHubRepository[],
+  userAgent: string,
+  token: string,
+): Promise<Map<string, GitHubRepositoryDetails>> {
+  const fields = repositories.map(
+    (repository, index) => `
+      repository${index}: repository(
+        owner: ${JSON.stringify(repository.owner.login)}
+        name: ${JSON.stringify(repository.name)}
+      ) {
+        latestRelease {
+          tagName
+        }
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history(first: 1) {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    `,
+  );
+  const response = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': `${userAgent}-astro-portfolio`,
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    body: JSON.stringify({ query: `query RepositoryDetails {${fields.join('')}}` }),
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `GitHub repository details request failed (${response.status} ${response.statusText}).`,
+    );
+  }
+
+  const result = (await response.json()) as GitHubGraphQLResponse;
+  if (result.errors?.length) {
+    throw new Error(
+      `GitHub repository details request failed: ${result.errors
+        .map(({ message }) => message)
+        .join('; ')}`,
+    );
+  }
+
+  return new Map(
+    repositories.flatMap((repository, index) => {
+      const details = result.data?.[`repository${index}`];
+      return details ? [[repository.full_name, details] as const] : [];
+    }),
+  );
 }
 
 export function githubRepositoriesLoader({
@@ -133,7 +211,7 @@ export function githubRepositoriesLoader({
       }
 
       const batches = await Promise.all(
-        sources.map((source) => fetchRepositories(source, username ?? organizations[0], token)),
+        sources.map((source) => fetchRepositories(source, username ?? organizations[0])),
       );
       const repositories = [
         ...new Map(batches.flat().map((repository) => [repository.full_name, repository])).values(),
@@ -141,12 +219,20 @@ export function githubRepositoriesLoader({
       const visibleRepositories = repositories.filter(
         (repository) => repository.visibility === 'public' && !repository.archived,
       );
+      const repositoryDetails = token
+        ? await fetchRepositoryDetails(
+            visibleRepositories,
+            username ?? organizations[0],
+            token,
+          )
+        : new Map<string, GitHubRepositoryDetails>();
 
       // Only clear persisted content after a successful fetch.
       store.clear();
 
       for (const repository of visibleRepositories) {
         const id = repository.full_name;
+        const details = repositoryDetails.get(repository.full_name);
         const data = await parseData({
           id,
           data: {
@@ -164,6 +250,8 @@ export function githubRepositoriesLoader({
             stars: repository.stargazers_count,
             forks: repository.forks_count,
             openIssues: repository.open_issues_count,
+            commitCount: details?.defaultBranchRef?.target.history?.totalCount ?? null,
+            latestRelease: details?.latestRelease?.tagName ?? null,
             createdAt: repository.created_at,
             updatedAt: repository.updated_at,
             pushedAt: repository.pushed_at,
@@ -184,6 +272,11 @@ export function githubRepositoriesLoader({
           `${sources.length} GitHub sources; excluded ` +
           `${repositories.length - visibleRepositories.length}.`,
       );
+      if (!token) {
+        logger.warn(
+          'GITHUB_TOKEN or GH_TOKEN is not set; release tags and commit counts are unavailable.',
+        );
+      }
     },
   } satisfies Loader;
 }
