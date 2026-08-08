@@ -6,11 +6,14 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "deploy": "./deploy.sh",
+    "deploy": "npm run build && gh-pages --dist dist --nojekyll --message \"Deploy site\"",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^7.0.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

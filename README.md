@@ -29,8 +29,8 @@ and restart the development server.
 
 ## Deployment
 
-GitHub Pages publishes the locally generated site from `/docs` on `master`.
-Configure the repository's Pages source once as **Deploy from a branch**, using
-the `master` branch and `/docs` folder. Then commit source changes normally and
-run `npm run deploy` from a clean working tree to build, commit, and push the
-generated site. No GitHub Actions secret is required.
+Astro generates the site locally in its default `./dist` directory. Configure
+the repository's Pages source once as **Deploy from a branch**, using the
+`gh-pages` branch and `/(root)` folder. Then run `npm run deploy` to build the
+site with the local `.env` file and publish only `dist` to that branch. No
+GitHub Actions secret is required.
