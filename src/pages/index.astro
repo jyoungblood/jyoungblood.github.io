@@ -65,6 +65,12 @@ const formatRepositoryName = (
     ? repository.fullName
     : repository.name;
 
+const formatRepositoryTypes = (topics: string[]) =>
+  topics
+    .filter((topic) => topic.startsWith("type-"))
+    .map((topic) => topic.slice("type-".length).replaceAll("-", " "))
+    .join(", ");
+
 const formatRomanNumeral = (value: number) => {
   const numerals: Array<[number, string]> = [
     [1000, "M"],
@@ -112,8 +118,16 @@ const formatRomanNumeral = (value: number) => {
         color: #0000ff;
       }
 
-      tbody tr:hover {
+      tbody tr:hover > * {
         background-color: #f2f2f2;
+      }
+
+      tbody tr.featured > * {
+        background-color: #fff4a3;
+      }
+
+      tbody tr.featured:hover > * {
+        background-color: #ffe066;
       }
 
       ::selection {
@@ -204,7 +218,7 @@ const formatRomanNumeral = (value: number) => {
                     repositoryNameIndex(data, featuredNames) >= 0;
 
                   return (
-                    <tr>
+                    <tr class={isFavorite ? "featured" : undefined}>
                       <td aria-label={isFavorite ? "Favorite" : undefined}>
                         {isFavorite ? "★" : ""}
                       </td>
@@ -219,7 +233,9 @@ const formatRomanNumeral = (value: number) => {
                         {formatRelease(data.latestRelease)}
                       </td>
                       <td align="center">{data.commitCount ?? ""}</td>
-                      <td align="center">{data.topics[0] ?? ""}</td>
+                      <td align="center">
+                        {formatRepositoryTypes(data.topics)}
+                      </td>
                       <td align="center">
                         <time datetime={data.createdAt}>
                           {formatRepositoryYear(data.createdAt)}
