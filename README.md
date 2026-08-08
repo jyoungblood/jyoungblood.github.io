@@ -26,3 +26,11 @@ commit-count metadata through GitHub's GraphQL API.
 Without a token, those two table columns remain blank. For local development,
 copy `.env.example` to `.env`, replace the placeholder with a read-only token,
 and restart the development server.
+
+## Deployment
+
+GitHub Pages publishes the locally generated site from `/docs` on `master`.
+Configure the repository's Pages source once as **Deploy from a branch**, using
+the `master` branch and `/docs` folder. Then commit source changes normally and
+run `npm run deploy` from a clean working tree to build, commit, and push the
+generated site. No GitHub Actions secret is required.
