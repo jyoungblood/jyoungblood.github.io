@@ -33,4 +33,5 @@ Astro generates the site locally in its default `./dist` directory. Configure
 the repository's Pages source once as **Deploy from a branch**, using the
 `gh-pages` branch and `/(root)` folder. Then run `npm run deploy` to build the
 site with the local `.env` file and publish only `dist` to that branch. No
-GitHub Actions secret is required.
+GitHub Actions secret is required. You can also run `./deploy.sh` directly;
+`npm run deploy` calls the same script.
