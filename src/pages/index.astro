@@ -75,6 +75,8 @@ const formatRepositoryTypes = (topics: string[]) =>
     .map((topic) => topic.slice("type-".length).replaceAll("-", " "))
     .join(", ");
 
+const websiteIcon = "\u{1F310}\u{FE0E}";
+
 const formatRomanNumeral = (value: number) => {
   const numerals: Array<[number, string]> = [
     [1000, "M"],
@@ -204,20 +206,23 @@ const formatRomanNumeral = (value: number) => {
             style="border-bottom: 1px solid"
           >
             <colgroup>
-              <col span="3" />
+              <col span="2" />
+              <col width="3%" />
+              <col />
               <col span="6" width="7%" />
             </colgroup>
             <thead>
               <tr>
                 <th scope="col" aria-label="Favorite"></th>
                 <th scope="col" align="left"></th>
+                <th scope="col" aria-label="Website"></th>
                 <th scope="col"></th>
                 <th scope="col" align="center">Language</th>
                 <th scope="col" align="center">Release</th>
                 <th scope="col" align="center">Commits</th>
                 <th scope="col" align="center">Type</th>
                 <th scope="col" align="center">Created</th>
-                <th scope="col" align="center">Updated</th>
+                <th scope="col" align="center">Last commit</th>
               </tr>
             </thead>
             <tbody>
@@ -236,6 +241,20 @@ const formatRomanNumeral = (value: number) => {
                           {formatRepositoryName(data)}
                         </a>
                       </th>
+                      <td align="center">
+                        {data.homepage && (
+                          <a
+                            href={data.homepage}
+                            target="_blank"
+                            rel="noopener"
+                            aria-label={`${formatRepositoryName(data)} website`}
+                            title="Website"
+                            style="color: black; text-decoration: none; &:hover { color: blue; }"
+                          >
+                            {websiteIcon}
+                          </a>
+                        )}
+                      </td>
                       <td>{data.description ?? ""}</td>
                       <td align="center">{data.language ?? ""}</td>
                       <td align="center">
@@ -251,9 +270,11 @@ const formatRomanNumeral = (value: number) => {
                         </time>
                       </td>
                       <td align="center">
-                        <time datetime={data.updatedAt}>
-                          {formatRepositoryDate(data.updatedAt)}
-                        </time>
+                        {data.latestCommitAt && (
+                          <time datetime={data.latestCommitAt}>
+                            {formatRepositoryDate(data.latestCommitAt)}
+                          </time>
+                        )}
                       </td>
                     </tr>
                   );

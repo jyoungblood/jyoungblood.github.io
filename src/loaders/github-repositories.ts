@@ -37,6 +37,7 @@ interface GitHubRepositoriesLoaderOptions {
 interface GitHubRepositoryDetails {
   defaultBranchRef: {
     target: {
+      committedDate: string;
       history?: {
         totalCount: number;
       };
@@ -72,6 +73,7 @@ const repositorySchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   pushedAt: z.string().nullable(),
+  latestCommitAt: z.string().nullable(),
   defaultBranch: z.string(),
   archived: z.boolean(),
   disabled: z.boolean(),
@@ -139,6 +141,7 @@ async function fetchRepositoryDetails(
         defaultBranchRef {
           target {
             ... on Commit {
+              committedDate
               history(first: 1) {
                 totalCount
               }
@@ -255,6 +258,8 @@ export function githubRepositoriesLoader({
             createdAt: repository.created_at,
             updatedAt: repository.updated_at,
             pushedAt: repository.pushed_at,
+            latestCommitAt:
+              details?.defaultBranchRef?.target.committedDate ?? repository.pushed_at,
             defaultBranch: repository.default_branch,
             archived: repository.archived,
             disabled: repository.disabled,
