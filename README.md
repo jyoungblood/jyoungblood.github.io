@@ -13,10 +13,11 @@ internal, and archived repositories are excluded before the page is generated.
 GitHub owns factual metadata such as language, stars, archive status, URLs, and
 latest-commit dates, including the repository name and description. The only
 local curation lives at the top of `src/pages/index.astro`:
-`featuredRepositoryNames` selects and orders featured projects, while
+`featuredRepositoryNames` highlights favorite projects,
+`classicRepositoryNames` gives longtime favorites a paler highlight, and
 `hiddenRepositoryNames` removes projects from the repository table.
 
-A short repository name in either list matches that name under any fetched
+A short repository name in any list matches that name under any fetched
 owner. Use the full GitHub name, such as `vergekit/repository-name`, when you
 need to distinguish repositories with matching names.
 

@@ -6,11 +6,15 @@ import { getCollection } from "astro:content";
 const featuredRepositoryNames = [
   "vergekit",
   "arena-screensaver",
+  "astro-arena",
   "pocketdocs",
+  "omz-themez",
+];
+
+const classicRepositoryNames = [
   // "darkwave",
   "jquery-digital-sign",
   "smoke.js",
-  "omz-themez",
   "s3bk",
   "dbx",
   "slime",
@@ -24,6 +28,7 @@ const repositories = await getCollection("repositories");
 const normalizeRepositoryName = (name: string) =>
   name.trim().toLocaleLowerCase();
 const featuredNames = featuredRepositoryNames.map(normalizeRepositoryName);
+const classicNames = classicRepositoryNames.map(normalizeRepositoryName);
 const hiddenNames = hiddenRepositoryNames.map(normalizeRepositoryName);
 
 const repositoryNameIndex = (
@@ -136,6 +141,14 @@ const formatRomanNumeral = (value: number) => {
         background-color: #ffe066;
       }
 
+      tbody tr.classic > * {
+        background-color: #fffbe6;
+      }
+
+      tbody tr.classic:hover > * {
+        background-color: #fff3bf;
+      }
+
       ::selection {
         color: #ffffff;
         background-color: #000000;
@@ -230,11 +243,29 @@ const formatRomanNumeral = (value: number) => {
                 repositoryIndex.map(({ data }) => {
                   const isFavorite =
                     repositoryNameIndex(data, featuredNames) >= 0;
+                  const isClassic =
+                    !isFavorite && repositoryNameIndex(data, classicNames) >= 0;
 
                   return (
-                    <tr class={isFavorite ? "featured" : undefined}>
-                      <td aria-label={isFavorite ? "Favorite" : undefined}>
-                        {isFavorite ? "★" : ""}
+                    <tr
+                      class={
+                        isFavorite
+                          ? "featured"
+                          : isClassic
+                            ? "classic"
+                            : undefined
+                      }
+                    >
+                      <td
+                        aria-label={
+                          isFavorite
+                            ? "Favorite"
+                            : isClassic
+                              ? "Classic"
+                              : undefined
+                        }
+                      >
+                        {isFavorite || isClassic ? "★" : ""}
                       </td>
                       <th scope="row" align="left">
                         <a href={data.url} target="_blank" rel="noopener">
